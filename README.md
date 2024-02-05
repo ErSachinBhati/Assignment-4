@@ -184,6 +184,7 @@ grep '\.txt$' file_list.txt
 
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/18e3bb96-6dec-487a-966b-b4bc65cac0dd)
 
+
 **Q 9: Create a new text file named "my_notes.txt" using the touch command. Open the file in the Vim editor, add some text, and save the changes.**
 ```
 cd /home/MyFiles/
@@ -205,7 +206,8 @@ sudo vim my_notes.txt
 
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/dfe2a2f0-e375-4f80-a2e3-295d867f24a5)
 
-**Ques 10 :Run the date command and store the output in a variable named "current_date." Display the value of the variable and append it to the "my_notes.txt" file.**
+
+**Q 10 :Run the date command and store the output in a variable named "current_date." Display the value of the variable and append it to the "my_notes.txt" file.**
 
 ```
 cd /home/MyFiles/
@@ -335,6 +337,7 @@ sudo chage -E $(date -d "+1 month" +"%Y-%m-%d") john_doe
 
 ```
 **Output**
+
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/15efdbd2-c73d-4b4d-a37d-a83c580240c0)
 
 **Ques 18 :Create a new group named "development_team." Add "john_doe" to this group and verify the group's existence.**
