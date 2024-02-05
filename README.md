@@ -254,3 +254,237 @@ cat my_notes.txt
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/4dde6569-698f-4d10-9172-094ad1ad43d7)
 
 
+**Q 13 : List all files in the "/etc" directory, filter the output to include only those containing the word "conf," and save the result to a file named "conf_files.txt."**
+```
+ls /etc | grep 'conf' > conf_files.txt
+
+```
+```
+vim conf_files.txt
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/f8209353-2637-48ed-bc82-73f7509e28fd)
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/89d1a310-c936-4288-953d-75379877091d)
+
+**Ques 15 : Create a new user account named "john_doe." Set the user's home directory to "/home/john_doe" and assign the user to the "users" group.**
+```
+grep '^users:' /etc/group
+
+```
+```
+sudo adduser --home /home/john_doe john_doe
+
+```
+```
+sudo usermod -aG users john_doe
+```
+```
+id john_doe
+```	
+
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/f1990a10-11d1-4b74-864f-713ba1d9e665)
+
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/72b468d1-456f-44bb-9046-c7c7dd9f8336)
+
+**Ques 16 : Add the user "john_doe" to the sudoers file, allowing them superuser privileges. Confirm that "john_doe" can execute commands with sudo.**
+```
+sudo usermod -aG users john_doe
+```
+```
+id john_doe
+```
+```
+su - john_doe
+```
+```
+sudo apt update
+```
+```
+exit
+```
+```
+sudo usermod -aG sudo john_doe
+```
+```
+id john_doe
+```
+```
+su - john_doe
+```
+```
+sudo su
+
+```
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/87a18e19-1126-45bb-9f75-1e5bdbb5dfbf)
+
+
+**Ques 17 :Modify the user account "john_doe" to change the default shell to "/bin/bash" and set the account's expiration date to one month from today.**
+
+```
+sudo chsh -s /bin/bash john_doe
+```
+```
+sudo chage -E $(date -d "+1 month" +"%Y-%m-%d") john_doe
+
+```
+**Output**
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/15efdbd2-c73d-4b4d-a37d-a83c580240c0)
+
+**Ques 18 :Create a new group named "development_team." Add "john_doe" to this group and verify the group's existence.**
+```
+sudo groupadd development_team
+```
+```
+sudo usermod -aG development_team john_doe
+```
+```
+getent group development_team
+
+```
+***Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/3dd26ed5-cc90-4ec9-bae5-c547899e89c5)
+
+
+**Q19. Remove "john_doe" from the "users" group and add them to the "development_team" group. Confirm the changes.**
+```
+id john_doe
+```
+```
+sudo deluser john_doe users
+
+```
+```
+sudo adduser john_doe development_team
+
+```
+```
+id john_doe
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/402ef2f2-314b-47a8-9710-f95e905a8188)
+
+**Q20. Delete the user account "john_doe" and ensure that their home directory is also removed.**
+```
+sudo deluser --remove-home john_doe
+
+```
+```
+id john_doe
+
+```
+```
+ls /home/john_doe
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/ca93a5d7-28ef-4719-8b35-4a77c0959d2b)
+
+
+**Q21. Delete the group "development_team" and ensure that all users previously belonging to the group are appropriately handled.**
+```
+sudo deluser john_doe development_team
+```
+```
+sudo delgroup development_team
+```
+```
+grep development_team /etc/group
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/9ed62efa-af7a-46f7-b1a6-739904d66868)
+
+**Q22. Implement a password policy that requires users to change their passwords every 90 days. Apply this policy to all existing and new user accounts.**
+```
+sudo chage -M 90 -m 0 -W 7 -I 30 -E -1 $(cut -d: -f1 /etc/passwd)
+
+```
+```
+sudo sed -i '/^PASS_MAX_DAYS/c\PASS_MAX_DAYS   90' /etc/login.defs
+
+```
+```
+sudo chage -l john_doe
+```
+```
+grep PASS_MAX_DAYS /etc/login.defs
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/77286fcf-b408-42ed-a7f1-239ffd701692)
+
+**Q23. Manually lock the user account "john_doe." Attempt to log in as "john_doe" to confirm that the account is locked. Then, unlock the account.**
+```
+sudo passwd -l john_doe
+
+```
+```
+su - john_doe
+
+```
+```
+sudo su - john_doe
+
+```
+```
+sudo passwd -u john_doe
+
+```
+```
+exit
+```
+```
+sudo passwd -u john_doe
+
+```
+```
+su - john_doe
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/a0867924-ef00-43fb-b5cb-924784fdf61e)
+
+
+**Q24. Use the id command to display detailed information about the "john_doe" user, including user ID, group ID, and supplementary groups.**
+```
+id john_doe
+```
+
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/a4c638eb-ba66-4642-b11d-5b0d0f860672)
+
+**Q25. Configure the password aging for the user "john_doe" to enforce a maximum password age of 60 days. Confirm that the changes take effect.**
+```
+sudo adduser john_doe
+
+```
+```
+sudo grep 'john_doe' /etc/passwd
+
+```
+```
+sudo chage -M 60 john_doe
+
+```
+```
+sudo chage -l john_doe
+
+```
+**Output**
+
+![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/713ed23f-77b3-4780-a30f-02b39113d0ff)
+
+
