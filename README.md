@@ -127,7 +127,6 @@ ls a*txt
 
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/0f438da5-bb03-43c5-a9cd-500bdd5a7b25)
 
-**Q 6: Rename all files in the "Documents" subdirectory of "MyFiles" with a ".bak" extension. Ensure the original file names are preserved.**
 
 **Q 7: Use a wildcard character to copy all files from the "Documents" subdirectory of "MyFiles" to another directory named "Backup."**
 
@@ -321,6 +320,8 @@ su - john_doe
 sudo su
 
 ```
+**Output**
+
 ![image](https://github.com/sachinkumarbhati/sachinkumarbhati/assets/158732178/87a18e19-1126-45bb-9f75-1e5bdbb5dfbf)
 
 
